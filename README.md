@@ -32,5 +32,15 @@ react-redux     =>    { Provider, connect }
         |                          |
 user Component              main Component
 
+数据组合的方法：combineReducers (redux)
+把状态数据转换成 props 数据进行使用的方法：mapStateToProps(func)
+connect(mapStateToProps)(App)
+
+const mapStateToProps = (state) => {
+  return {
+    counter: state.counter
+  };
+};
+
 
 
