@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { increment, decrement } from './actions'
+import PropTypes from 'prop-types';
+import { increment, decrement } from './actions';
+// import { bindActionCreators } from 'redux';
 
 class App extends Component {
   render() {
-    const { dispatch } = this.props;
+    const { increment, decrement } = this.props;
     return (
       <div className="container">
         <h1 className="jumbotron-heading text-center">{ this.props.counter }</h1>
         <p className="text-center">
-          <button onClick={()=> dispatch(increment)} className="btn btn-primary mr-2">Increase</button>
-          <button onClick={()=> dispatch(decrement)} className="btn btn-danger my-2">Decrease</button>
+          <button onClick={ () => increment() } className="btn btn-primary mr-2">Increase</button>
+          <button onClick={ () => decrement() } className="btn btn-danger my-2">Decrease</button>
         </p>
       </div>
     );
@@ -23,4 +25,16 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     increment: (name) => { dispatch(increment(name)) }
+//   }
+// };
+
+App.propTypes = {
+  counter: PropTypes.number.isRequired,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired
+}
+
+export default connect(mapStateToProps, { increment, decrement })(App);
